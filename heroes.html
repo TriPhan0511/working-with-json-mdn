@@ -27,7 +27,7 @@
             request.open('GET', requestURL);
 
             // Set the responseType to json,
-            // so that XHR (XNLHttpRequest) knows that the server will be returning JSON
+            // so that XHR (XMLHttpRequest) knows that the server will be returning JSON
             request.responseType = 'json';
 
             // Send the request with send() method
@@ -37,54 +37,60 @@
             // the dealing with it
             request.onload = function () {
                 const superHeroes = request.response;
-                console.log(superHeroes);
                 populateHeader(superHeroes);
                 showHeroes(superHeroes);
+
+                // const str = JSON.stringify(superHeroes);
+                // console.log(str);
+                // console.log(typeof str);
             };
 
-            // Function:
-            // function populateHeader2(obj) {
-            //     const heading = document.createElement('h1');
-            //     heading.textContent = obj.squadName;
-            //     header.appendChild(heading);
+            // Function: Populating the header
+            function populateHeader(obj) {
+                const myH1 = document.createElement('h1');
+                myH1.textContent = obj['squadName'];
+                header.appendChild(myH1);
 
-            //     const para = document.createElement('p');
-            //     para.textContent = `Hometown: ${obj.homeTown} // Formed: ${obj.formed}`;
-            //     header.appendChild(para);
-            // }
+                const myPara = document.createElement('p');
+                myPara.textContent = `Hometown: ${obj['homeTown']} // Formed: ${obj['formed']}`;
+                header.appendChild(myPara);
+            }
 
-            // Function:
-            // function showHeroes2(obj) {
-            //     for (const member of obj.members) {
-            //         const article = document.createElement('article');
+            // Function: Creating the hero information cards
+            function showHeroes(obj) {
+                const heroes = obj['members'];
+                console.log(heroes); // Check
+                for (let i = 0; i < heroes.length; i++) {
+                    const hero = heroes[i];
+                    const myArticle = document.createElement('article');
+                    const myH2 = document.createElement('h2');
+                    const myPara1 = document.createElement('p');
+                    const myPara2 = document.createElement('p');
+                    const myPara3 = document.createElement('p');
+                    const myList = document.createElement('ul');
 
-            //         const heading = document.createElement('h2');
-            //         heading.textContent = member.name;
-            //         article.appendChild(heading);
+                    myH2.textContent = hero['name'];
+                    myPara1.textContent = `Secret Identity: ${hero['secretIdentity']}`;
+                    myPara2.textContent = `Age: ${hero['age']}`;
+                    myPara3.textContent = 'Superpowers:';
 
-            //         const p1 = document.createElement('p');
-            //         p1.textContent = `Secret Identity: ${member.secretIdentity}`;
-            //         article.appendChild(p1);
+                    const powers = hero['powers'];
+                    for (let j = 0; j < powers.length; j++) {
+                        const power = powers[j];
+                        const listItem = document.createElement('li');
+                        listItem.textContent = power;
+                        myList.appendChild(listItem);
+                    }
 
-            //         const p2 = document.createElement('p');
-            //         p2.textContent = `Age: ${member.age}`;
-            //         article.appendChild(p2);
+                    myArticle.appendChild(myH2);
+                    myArticle.appendChild(myPara1);
+                    myArticle.appendChild(myPara2);
+                    myArticle.appendChild(myPara3);
+                    myArticle.appendChild(myList);
 
-            //         const p3 = document.createElement('p');
-            //         p3.textContent = 'Superpowers:';
-            //         article.appendChild(p3);
-
-            //         const list = document.createElement('ul');
-            //         for (const value of member.powers) {
-            //             const listItem = document.createElement('li');
-            //             listItem.textContent = value;
-            //             list.appendChild(listItem);
-            //         }
-            //         article.appendChild(list);
-
-            //         section.appendChild(article);
-            //     }
-            // }
+                    section.appendChild(myArticle);
+                }
+            }
         </script>
     </body>
 </html>
