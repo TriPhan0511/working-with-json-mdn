@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Heroes</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header></header>
+        <section></section>
+        <script>
+            // Get references to header and section in the body tag
+            const header = document.querySelector('header');
+            const section = document.querySelector('section');
+
+            // Obtaining the JSON
+            // Store the URL of the JSON we want to retrieve
+            let requestURL =
+                'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+
+            // Create a new request object instance from the XMLHttpRequest constructor
+            let request = new XMLHttpRequest();
+
+            // Open the request using the open() method
+            request.open('GET', requestURL);
+
+            // Set the responseType to json,
+            // so that XHR (XNLHttpRequest) knows that the server will be returning JSON
+            request.responseType = 'json';
+
+            // Send the request with send() method
+            request.send();
+
+            // Waiting for the response to return from the server,
+            // the dealing with it
+            request.onload = function () {
+                const superHeroes = request.response;
+                console.log(superHeroes);
+                populateHeader(superHeroes);
+                showHeroes(superHeroes);
+            };
+
+            // Function:
+            // function populateHeader2(obj) {
+            //     const heading = document.createElement('h1');
+            //     heading.textContent = obj.squadName;
+            //     header.appendChild(heading);
+
+            //     const para = document.createElement('p');
+            //     para.textContent = `Hometown: ${obj.homeTown} // Formed: ${obj.formed}`;
+            //     header.appendChild(para);
+            // }
+
+            // Function:
+            // function showHeroes2(obj) {
+            //     for (const member of obj.members) {
+            //         const article = document.createElement('article');
+
+            //         const heading = document.createElement('h2');
+            //         heading.textContent = member.name;
+            //         article.appendChild(heading);
+
+            //         const p1 = document.createElement('p');
+            //         p1.textContent = `Secret Identity: ${member.secretIdentity}`;
+            //         article.appendChild(p1);
+
+            //         const p2 = document.createElement('p');
+            //         p2.textContent = `Age: ${member.age}`;
+            //         article.appendChild(p2);
+
+            //         const p3 = document.createElement('p');
+            //         p3.textContent = 'Superpowers:';
+            //         article.appendChild(p3);
+
+            //         const list = document.createElement('ul');
+            //         for (const value of member.powers) {
+            //             const listItem = document.createElement('li');
+            //             listItem.textContent = value;
+            //             list.appendChild(listItem);
+            //         }
+            //         article.appendChild(list);
+
+            //         section.appendChild(article);
+            //     }
+            // }
+        </script>
+    </body>
+</html>
