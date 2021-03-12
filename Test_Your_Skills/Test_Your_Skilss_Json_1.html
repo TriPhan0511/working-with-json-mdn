@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Test Your Skills - JSON 1</title>
+    </head>
+    <body>
+        <script>
+            // Obtain JSON
+            // Set request URL
+            // const requestURL =
+            //     'https://github.com/mdn/learning-area/blob/master/javascript/oojs/tasks/json/sample.json';
+            let requestURL =
+                'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+
+            // Initial a XMLHttpRequest instance
+            const request = new XMLHttpRequest();
+            // Open the request
+            request.open('GET', requestURL);
+            // Set the type of response to text
+            request.responseType = 'text';
+            // Send the request
+            request.send();
+
+            // Get response
+            request.onload = function () {
+                const catString = request.response;
+                displayCatInfo(catString);
+            };
+
+            // Function
+            function displayCatInfo(catString) {
+                const cats = JSON.parse(catString);
+                // const motherInfo =
+                for (let i = 0; i < cats.length; i++) {
+                    const cat = cats[i];
+                    console.log(cat.name);
+                }
+            }
+        </script>
+    </body>
+</html>
